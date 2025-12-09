@@ -23,7 +23,7 @@ const startServer = async () => {
     console.log("Database connected!");
 
     app.listen(process.env.PORT || 5000, () => {
-      console.log(`Server running on port ${port}`);
+      console.log(`Server running on port ${process.env.PORT}`);
     });
   } catch (error) {
     console.error("DB connection error: ", error);
@@ -38,5 +38,5 @@ app.use("/api/user", userRouter);
 //contact Route
 app.use("/api/contact", contactRouter);
 
-const port = process.env.PORT;
-app.listen(port, ()=> console.log(`Successfully running on port ${port}`));
+// const port = process.env.PORT;
+// app.listen(port, ()=> console.log(`Successfully running on port ${port}`));
