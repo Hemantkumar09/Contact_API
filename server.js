@@ -10,9 +10,27 @@ app.use(bodyParser.json());
 
 config({path: '.env'})
 
-mongoose.connect(process.env.DB_NAME,{
-    "dbName": "NodejsTutorial"
-}).then(() => console.log("MondoDB Connected...")).catch((err)=> console.log(err))
+// mongoose.connect(process.env.DB_NAME,{
+//     "dbName": "NodejsTutorial"
+// }).then(() => console.log("MondoDB Connected...")).catch((err)=> console.log(err))
+
+
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.DB_NAME,{
+        "dbName": "NodejsTutorial"
+    });
+    console.log("Database connected!");
+
+    app.listen(process.env.PORT || 5000, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (error) {
+    console.error("DB connection error: ", error);
+  }
+};
+
+startServer();
 
 //user Route
 app.use("/api/user", userRouter);
